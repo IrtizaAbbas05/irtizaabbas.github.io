@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irtiza Abbas — Data Analytics Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F8F6;
+    --panel:#FFFFFF;
+    --ink:#1C2B33;
+    --ink-soft:#52625F;
+    --muted:#8A968F;
+    --accent:#1F6F5C;
+    --accent-soft:#E4EFEA;
+    --amber:#9C7A2E;
+    --amber-soft:#F3ECDA;
+    --border:#DEE3DD;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --serif: 'Fraunces', serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding:64px 28px 100px; }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 14px;
+  }
+  h1.name{
+    font-family:var(--serif); font-weight:500; font-size:clamp(38px,7vw,58px);
+    margin:0 0 6px; letter-spacing:-0.01em;
+  }
+  .role{ font-size:17px; color:var(--ink-soft); margin:0 0 26px; }
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:6px 14px; font-size:13.5px;
+    color:var(--ink-soft); font-family:var(--mono);
+  }
+  .contact-row a{ color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--border); }
+  .contact-row a:hover{ color:var(--accent); border-color:var(--accent); }
+  .contact-row span.dot{ color:var(--muted); }
+
+  hr.rule{ border:none; border-top:1px solid var(--border); margin:40px 0; }
+
+  .formula-bar{
+    display:flex; align-items:center; background:var(--panel);
+    border:1px solid var(--border); border-radius:8px; overflow:hidden; margin:0 0 32px;
+  }
+  .formula-bar .fx{
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+    background:var(--accent-soft); padding:12px 16px; border-right:1px solid var(--border); flex-shrink:0;
+  }
+  .formula-bar .formula{
+    font-family:var(--mono); font-size:13.5px; color:var(--ink);
+    padding:12px 16px; overflow-x:auto; white-space:nowrap;
+  }
+  .formula-bar .formula .fn{ color:var(--accent); }
+  .formula-bar .formula .str{ color:var(--amber); }
+
+  .note-banner{
+    font-size:13px; color:var(--ink-soft); background:var(--panel);
+    border:1px solid var(--border); border-left:3px solid var(--accent);
+    border-radius:0 6px 6px 0; padding:12px 16px; margin:0 0 48px;
+  }
+  .note-banner strong{ color:var(--ink); }
+
+  h2.section{ font-family:var(--serif); font-weight:500; font-size:22px; margin:0 0 18px; }
+  section{ margin-bottom:48px; }
+  p.lede{ font-size:15.5px; color:var(--ink-soft); max-width:62ch; }
+
+  .tag-group{ margin-bottom:16px; }
+  .tag-group .label{
+    font-family:var(--mono); font-size:11.5px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;
+  }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family:var(--mono); font-size:12.5px; padding:5px 10px;
+    border:1px solid var(--border); border-radius:5px; color:var(--ink-soft); background:var(--panel);
+  }
+
+  .project{
+    display:grid; grid-template-columns:64px 1fr; gap:20px;
+    padding:22px 0; border-top:1px solid var(--border);
+  }
+  .project:last-child{ border-bottom:1px solid var(--border); }
+  .project .cell-ref{ font-family:var(--mono); font-size:12.5px; color:var(--accent); padding-top:3px; }
+  .project h3{ font-family:var(--sans); font-weight:600; font-size:16.5px; margin:0 0 8px; }
+  .project p.desc{ font-size:14.5px; color:var(--ink-soft); margin:0 0 12px; max-width:56ch; }
+  .project .meta{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .chip{
+    font-family:var(--mono); font-size:11.5px; padding:3px 8px; border-radius:4px;
+    background:var(--accent-soft); color:var(--accent);
+  }
+  .chip.spec{ background:var(--amber-soft); color:var(--amber); }
+  .chip.dataset{ background:var(--bg); color:var(--muted); border:1px solid var(--border); }
+  .file-link{
+    font-family:var(--mono); font-size:11.5px; padding:3px 8px; border-radius:4px;
+    color:var(--accent); border:1px solid var(--accent-soft); text-decoration:none;
+  }
+  .file-link:hover{ background:var(--accent-soft); }
+
+  .flat-list{ list-style:none; padding:0; margin:0; }
+  .flat-list li{
+    display:flex; justify-content:space-between; gap:16px; padding:12px 0;
+    border-top:1px solid var(--border); font-size:14.5px;
+  }
+  .flat-list li:last-child{ border-bottom:1px solid var(--border); }
+  .flat-list .item-name{ color:var(--ink); }
+  .flat-list .item-date{ font-family:var(--mono); font-size:12.5px; color:var(--muted); white-space:nowrap; }
+  .status-pill{
+    font-family:var(--mono); font-size:11px; padding:2px 8px; border-radius:20px;
+    background:var(--accent-soft); color:var(--accent); margin-left:8px;
+  }
+  .status-pill.progress{ background:var(--amber-soft); color:var(--amber); }
+
+  footer{
+    margin-top:56px; padding-top:28px; border-top:1px solid var(--border);
+    font-size:13.5px; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+  footer a{ color:var(--ink-soft); }
+
+  @media (max-width:520px){
+    .project{ grid-template-columns:1fr; }
+    .project .cell-ref{ padding-top:0; }
+    footer{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Data analytics portfolio</p>
+  <h1 class="name">Irtiza Abbas</h1>
+  <p class="role">Entry-level data analyst — Excel, SQL &amp; Python fundamentals</p>
+  <div class="contact-row">
+    <a href="mailto:irtizaabbas05@gmail.com">irtizaabbas05@gmail.com</a>
+    <span class="dot">·</span>
+    <span>+92 333 7701040</span>
+    <span class="dot">·</span>
+    <a href="https://linkedin.com/in/irtizaabbasawan" target="_blank" rel="noopener">linkedin.com/in/irtizaabbasawan</a>
+    <span class="dot">·</span>
+    <a href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io" target="_blank" rel="noopener">GitHub repo</a>
+    <span class="dot">·</span>
+    <span>Sargodha, Pakistan</span>
+  </div>
+
+  <hr class="rule">
+
+  <div class="formula-bar">
+    <div class="fx">fx</div>
+    <div class="formula">=<span class="fn">PROFILE</span>(<span class="str">"Chemistry Graduate"</span>, <span class="str">"Excel"</span>, <span class="str">"SQL"</span>, <span class="str">"Python"</span>) + <span class="fn">PROJECTS</span>(<span class="str">9</span>)</div>
+  </div>
+
+  <div class="note-banner">
+    <strong>A note on the data:</strong> every project below uses a practice dataset generated to model a realistic business scenario — not real company or client data. Each includes the actual worksheet, linked below, so you can open the workbook and see the work directly.
+  </div>
+
+  <section>
+    <h2 class="section">Profile</h2>
+    <p class="lede">Chemistry graduate (University of Sargodha) building a second, self-taught skill set in data analytics. Comfortable turning raw spreadsheets and relational databases into clean, decision-ready insight — and, thanks to a background in one-on-one tutoring, comfortable explaining that insight to people who don't touch the data themselves.</p>
+  </section>
+
+  <section>
+    <h2 class="section">Skills</h2>
+    <div class="tag-group">
+      <div class="label">Excel</div>
+      <div class="tags">
+        <span class="tag">Data cleaning</span>
+        <span class="tag">Pivot tables &amp; charts</span>
+        <span class="tag">Dashboards &amp; KPIs</span>
+        <span class="tag">Slicers</span>
+        <span class="tag">Power Query</span>
+      </div>
+    </div>
+    <div class="tag-group">
+      <div class="label">SQL</div>
+      <div class="tags">
+        <span class="tag">SELECT</span>
+        <span class="tag">WHERE</span>
+        <span class="tag">GROUP BY</span>
+        <span class="tag">ORDER BY</span>
+        <span class="tag">HAVING</span>
+        <span class="tag">JOINS</span>
+      </div>
+    </div>
+    <div class="tag-group">
+      <div class="label">Other</div>
+      <div class="tags">
+        <span class="tag">Basic Python (VS Code)</span>
+        <span class="tag">Public speaking</span>
+        <span class="tag">Analytical thinking</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section">Projects</h2>
+
+    <div class="project">
+      <div class="cell-ref">P01</div>
+      <div>
+        <h3>Retail Sales Analytics Dashboard</h3>
+        <p class="desc">First Excel project after learning the tool — built an interactive dashboard surfacing key KPIs in a stakeholder-ready view.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">Pivot tables</span>
+          <span class="chip spec">150–300 rows · 8–12 cols</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/Interactive-Sales-Dashboard-Analytics-Project.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P02</div>
+      <div>
+        <h3>Tech-Mart SQL Analytics</h3>
+        <p class="desc">Queried a relational database in SQL Server (SSMS) at a basic–intermediate level — SELECT, WHERE, GROUP BY, ORDER BY, HAVING, and JOINs — to answer applied business questions.</p>
+        <div class="meta">
+          <span class="chip">SQL Server / SSMS</span>
+          <span class="chip">Joins &amp; aggregation</span>
+          <span class="chip spec">4–5 linked tables</span>
+          <span class="chip dataset">Practice dataset</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P03</div>
+      <div>
+        <h3>Data Cleaning in Excel</h3>
+        <p class="desc">Converted a raw, inconsistent dataset into an analysis-ready table by removing duplicates, validating entries, and standardizing formatting.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">Data validation</span>
+          <span class="chip spec">150–300 rows · 8–12 cols</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/Project-3-Cleaning-Raw-Data.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P04</div>
+      <div>
+        <h3>NovaMart Retail Store Analytics</h3>
+        <p class="desc">Analyzed wholesale-store sales data using pivot tables and pivot charts to surface trends and support business recommendations.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">Pivot charts</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/NovaMart-Retail-store-project.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P05</div>
+      <div>
+        <h3>Bike Sales — Customer Insights Dashboard</h3>
+        <p class="desc">Filtered, sorted, and cleaned a bike-sales dataset, then built a dashboard covering customer age bracket, average income per purchase, and customer commute — with charts, visualizations, and slicers.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">Slicers</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/Bike-Sales-Project.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P06</div>
+      <div>
+        <h3>Business Analysis — Sales &amp; Customer KPI Dashboard</h3>
+        <p class="desc">Cleaned and explored a sales, customer-service, and product dataset, then built a KPI dashboard with reports, pivot charts, slicers, and visualizations.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">KPI dashboard</span>
+          <span class="chip spec">21 rows · 11 cols</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/Business%20Analysis%20Project.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P07</div>
+      <div>
+        <h3>Financial Analysis — Executive Dashboard</h3>
+        <p class="desc">Cleaned and organized raw monthly financial data, applied statistical summarization, and built an executive dashboard with KPIs, charts, and tables.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">Statistical formulas</span>
+          <span class="chip spec">17 rows · 6 cols</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/Financial_Analysis_PROJECT.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P08</div>
+      <div>
+        <h3>Customer Service &amp; Sales Analysis</h3>
+        <p class="desc">Cleaned customer-service, product, and order data into a well-organized table, then built a KPI dashboard with basic analysis.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">KPI dashboard</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/PROJECT-2-Customer-Analysis.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="cell-ref">P09</div>
+      <div>
+        <h3>Excel Fundamentals — Pivot Tables &amp; Formula Practice</h3>
+        <p class="desc">Foundational practice exercise covering pivot tables, pivot charts, and essential formula calculations.</p>
+        <div class="meta">
+          <span class="chip">Excel</span>
+          <span class="chip">Formulas</span>
+          <span class="chip dataset">Practice dataset</span>
+          <a class="file-link" href="https://github.com/IrtizaAbbas05/irtizaabbas.github.io/blob/main/PROJECT%204.xlsx" target="_blank" rel="noopener">View file →</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section>
+    <h2 class="section">Experience</h2>
+    <ul class="flat-list">
+      <li>
+        <span class="item-name">Private tutor — 3 students, Grades 7–10 (Cambridge &amp; matriculation)</span>
+        <span class="item-date">Aug 2024 – Feb 2025</span>
+      </li>
+      <li>
+        <span class="item-name">Self-directed data analytics practice — Excel, SQL, Python</span>
+        <span class="item-date">2025 – Present</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section">Certifications</h2>
+    <ul class="flat-list">
+      <li>
+        <span class="item-name">Power Query Corporate Training — Masterclass Certificate <span class="status-pill">Completed</span></span>
+        <span class="item-date">July 2026</span>
+      </li>
+      <li>
+        <span class="item-name">Excel Mastery for Data Analytics <span class="status-pill progress">In progress</span></span>
+        <span class="item-date">—</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Irtiza Abbas — Data Analytics Portfolio</span>
+    <a href="mailto:irtizaabbas05@gmail.com">Get in touch →</a>
+  </footer>
+
+</div>
+</body>
+</html>
